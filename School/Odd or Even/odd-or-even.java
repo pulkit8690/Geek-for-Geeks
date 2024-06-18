@@ -21,12 +21,14 @@ class GFG
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 class Solution{
     static String oddEven(int N){
         // code here
         StringBuilder s=new StringBuilder("");
-        if(N%2==0)
+        if((N & 1)==0)
         {
             s.append("even");
         }
