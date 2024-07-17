@@ -125,40 +125,22 @@ class Solution
 	Node lca(Node root, int n1,int n2)
 	{
 		// Your code here
-		ArrayList<Node> path1= new ArrayList<>();
-		ArrayList<Node> path2= new ArrayList<>();
-		getPath(root,n1,path1);
-		getPath(root,n2,path2);
-		int i=0;
-		for(;i<path1.size() && i<path2.size();i++)
+		if(root==null || root.data==n1 || root.data==n2)
 		{
-		    if(path1.get(i)!=path2.get(i))
-		    {
-		        break;
-		    }
+		    return root;
 		}
-		Node lca = path1.get(i-1);
-		return lca;
+		Node Left = lca(root.left,n1,n2);
+		Node Right=lca(root.right,n1,n2);
+		if(Left==null)
+		{
+		    return Right;
+		}
+		if(Right==null)
+		{
+		    return Left;
+		}
+		return root;
 	}
-	boolean getPath(Node root, int n,ArrayList<Node> path)
-	{
-	    if(root==null)
-	    {
-	        return false;
-	    }
-	    path.add(root);
-	    if(root.data==n)
-	    {
-	        return true;
-	    }
-	    boolean foundleft=getPath(root.left,n,path);
-	    boolean foundright=getPath(root.right,n,path);
-	    if(foundleft || foundright)
-	    {
-	        return true;
-	    }
-	    path.remove(path.size()-1);
-	    return false;
-	}
+	
 }
 
