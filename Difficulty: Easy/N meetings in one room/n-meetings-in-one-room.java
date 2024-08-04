@@ -1,12 +1,11 @@
 //{ Driver Code Starts
 import java.io.*;
-import java.util.*;
 import java.lang.*;
+import java.util.*;
 
 class GFG {
     public static void main(String args[]) throws IOException {
-        BufferedReader br =
-            new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine().trim());
 
         while (t-- > 0) {
@@ -17,14 +16,12 @@ class GFG {
             int end[] = new int[n];
 
             inputLine = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++)
-                start[i] = Integer.parseInt(inputLine[i]);
+            for (int i = 0; i < n; i++) start[i] = Integer.parseInt(inputLine[i]);
 
             inputLine = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) 
-                end[i] = Integer.parseInt(inputLine[i]);
-                
-            int ans = new Solution().maxMeetings(start, end, n);
+            for (int i = 0; i < n; i++) end[i] = Integer.parseInt(inputLine[i]);
+
+            int ans = new Solution().maxMeetings(n, start, end);
             System.out.println(ans);
         }
     }
@@ -33,31 +30,29 @@ class GFG {
 // } Driver Code Ends
 
 
-class Solution 
-{
-    //Function to find the maximum number of meetings that can
-    //be performed in a meeting room.
-    public static int maxMeetings(int start[], int end[], int n)
-    {
+class Solution {
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room.
+    public int maxMeetings(int n, int start[], int end[]) {
         // add your code here
-        int arr[][]= new int [n][3];
-        for(int i=0;i<n;i++ )
+        int[][] meet = new int[n][3];
+        for(int i=0;i<n;i++)
         {
-            arr[i][0]=i;
-            arr[i][1]=start[i];
-            arr[i][2]=end[i];
+            meet[i][0]=i;
+            meet[i][1]=start[i];
+            meet[i][2]=end[i];
         }
-        Arrays.sort(arr,Comparator.comparingDouble(o->o[2]));
-        int count=1;
-        int last=arr[0][2];
-        for(int j=1;j<n;j++)
+        Arrays.sort(meet,Comparator.comparingDouble(o->o[2]));
+        int ans=1;
+        int last=meet[0][2];
+        for(int i=1;i<n;i++)
         {
-            if(arr[j][1]>last)
+            if(meet[i][1]>last)
             {
-                count++;
-                last=arr[j][2];
+                ans++;
+                last=meet[i][2];
             }
         }
-        return count;
+        return ans;
     }
 }
