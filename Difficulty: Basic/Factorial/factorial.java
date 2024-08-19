@@ -26,7 +26,6 @@ class Solution{
         {
             return 1;
         }
-        long ans= N * factorial(N-1);
-        return ans;
+        return N*factorial(N-1);
     }
 }
